@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import api from '../api/api';
 import { createPortal } from 'react-dom';
 import { Loader } from 'lucide-react';
 
@@ -21,12 +22,7 @@ export default function Login() {
     e.preventDefault();
     setContactStatus('loading');
     try {
-      const res = await fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contactForm)
-      });
-      if (!res.ok) throw new Error();
+      await api.post('/contact', contactForm);
       setContactStatus('success');
       setTimeout(() => { setShowContact(false); setContactStatus(''); setContactForm({name:'', email:'', message:''}) }, 2500);
     } catch {

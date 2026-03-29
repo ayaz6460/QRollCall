@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { Lock, ArrowLeft, Loader } from 'lucide-react';
+import api from '../api/api';
 
 export default function ResetPassword() {
   const [searchParams] = useSearchParams();
@@ -48,13 +49,7 @@ export default function ResetPassword() {
           : { token })
       };
 
-      const res = await fetch('http://localhost:3000/api/reset-password', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(requestBody)
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Password reset failed');
+      const data = await api.post('/reset-password', requestBody).then(r => r.data);
 
       setMessage(data.message);
       setTimeout(() => navigate('/'), 3000);

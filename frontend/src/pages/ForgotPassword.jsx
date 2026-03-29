@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { createPortal } from 'react-dom';
 import { Mail, ArrowLeft, Loader } from 'lucide-react';
+import api from '../api/api';
 
 export default function ForgotPassword() {
   const [id, setId] = useState('');
@@ -22,13 +23,7 @@ export default function ForgotPassword() {
     e.preventDefault();
     setContactStatus('loading');
     try {
-      const res = await fetch('http://localhost:3000/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(contactForm)
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Failed to send message');
+      await api.post('/contact', contactForm);
       setContactStatus('success');
       setTimeout(() => closeHelpPopup(), 2000);
     } catch {

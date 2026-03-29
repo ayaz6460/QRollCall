@@ -1,8 +1,11 @@
 // src/api/api.js
 import axios from 'axios';
 
+const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL;
+const baseURL = configuredBaseUrl ? configuredBaseUrl.replace(/\/$/, '') : '/api';
+
 const api = axios.create({
-  baseURL: '/api',
+  baseURL,
 });
 
 // Attach token from localStorage on every request
