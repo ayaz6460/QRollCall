@@ -1,8 +1,9 @@
+import { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, QrCode, Users, AlertTriangle, Bell,
-  BarChart2, UserCircle, LogOut, ScanLine, CheckSquare, Shield
+  BarChart2, UserCircle, LogOut, ScanLine, CheckSquare, Shield, Menu, X
 } from 'lucide-react';
 
 const studentNav = [
@@ -37,20 +38,36 @@ export default function Sidebar({ role = 'student', userName = 'Arjun Sharma', o
   const navigate = useNavigate();
   const location = useLocation();
   const { logout } = useAuth();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const navItems = role === 'admin' ? adminNav : role === 'teacher' ? teacherNav : studentNav;
   const initials = userName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
 
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [location.pathname]);
+
   const handleSignOut = () => {
+    setMobileOpen(false);
     if (typeof onLogout === 'function') onLogout();
     else logout();
     navigate('/login', { replace: true });
   };
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
       <div className="sidebar-logo">
-        <div className="logo-icon">Q</div>
-        <span className="logo-text">QR<span>oll</span>Call</span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          <div className="logo-icon">Q</div>
+          <span className="logo-text">QR<span>oll</span>Call</span>
+        </div>
+        <button
+          type="button"
+          className="sidebar-mobile-toggle"
+          onClick={() => setMobileOpen(prev => !prev)}
+          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        >
+          {mobileOpen ? <X size={18} /> : <Menu size={18} />}
+        </button>
       </div>
 
       <nav className="sidebar-nav">
@@ -63,7 +80,10 @@ export default function Sidebar({ role = 'student', userName = 'Arjun Sharma', o
             <div
               key={path}
               className={`nav-item ${isActive ? 'active' : ''}`}
-              onClick={() => navigate(path)}
+              onClick={() => {
+                setMobileOpen(false);
+                navigate(path);
+              }}
             >
               <Icon size={17} className="nav-icon" />
               {label}
