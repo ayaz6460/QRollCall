@@ -4,6 +4,7 @@ const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 const jwt = require('jsonwebtoken');
 const supabase = require('./supabase');
 
@@ -13,9 +14,13 @@ const io = new Server(server, {
   cors: { origin: '*', methods: ['GET', 'POST'] }
 });
 
+const distDir = path.join(__dirname, '../frontend/dist');
+const fallbackFrontendDir = path.join(__dirname, '../frontend');
+const staticDir = fs.existsSync(path.join(distDir, 'index.html')) ? distDir : fallbackFrontendDir;
+
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(staticDir));
 
 // Attach io to requests
 app.use((req, res, next) => { req.io = io; next(); });
@@ -235,7 +240,12 @@ app.get('/health', (req, res) => {
 
 // ─── Serve Frontend ──────────────────────────────────────────────────────────
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(staticDir, 'index.html'));
+});
+
+// SPA fallback for frontend routes (e.g., /login, /teacher, /admin/students)
+app.get(/^(?!\/api|\/health|\/socket\.io).*/, (req, res) => {
+  res.sendFile(path.join(staticDir, 'index.html'));
 });
 
 const PORT = process.env.PORT || 3000;
