@@ -668,22 +668,58 @@ tbody tr:hover td { background: var(--primary-light); }
   display: none;
 }
 
+.sidebar-floating-toggle,
+.sidebar-mobile-overlay {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .app-layout {
-    flex-direction: column;
+    flex-direction: row;
     min-height: 100dvh;
   }
 
   .sidebar {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
-    right: 0;
-    width: 100%;
-    height: auto;
-    border-right: none;
-    border-bottom: 1px solid var(--border);
+    width: min(280px, 82vw);
+    height: 100dvh;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
     z-index: 140;
+    box-shadow: var(--shadow-sm);
+    transform: translateX(-102%);
+    transition: transform 0.25s ease;
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+  }
+
+  .sidebar-mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(2, 6, 23, 0.45);
+    backdrop-filter: blur(2px);
+    z-index: 130;
+  }
+
+  .sidebar-floating-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+    z-index: 145;
     box-shadow: var(--shadow-sm);
   }
 
@@ -748,12 +784,13 @@ tbody tr:hover td { background: var(--primary-light); }
 
   .main-content {
     margin-left: 0;
-    min-height: calc(100dvh - 62px);
+    min-height: 100dvh;
+    width: 100%;
   }
 
   .topbar {
     height: 56px;
-    padding: 0 12px;
+    padding: 0 12px 0 56px;
   }
 
   .topbar-left {
@@ -826,6 +863,13 @@ tbody tr:hover td { background: var(--primary-light); }
   .sidebar-mobile-toggle {
     width: 32px;
     height: 32px;
+  }
+
+  .sidebar-floating-toggle {
+    top: 10px;
+    left: 10px;
+    width: 34px;
+    height: 34px;
   }
 
   .topbar {

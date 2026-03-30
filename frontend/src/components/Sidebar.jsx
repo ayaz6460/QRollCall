@@ -54,7 +54,19 @@ export default function Sidebar({ role = 'student', userName = 'Arjun Sharma', o
   };
 
   return (
-    <aside className={`sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
+    <>
+      <button
+        type="button"
+        className="sidebar-floating-toggle"
+        onClick={() => setMobileOpen(true)}
+        aria-label="Open menu"
+      >
+        <Menu size={18} />
+      </button>
+
+      {mobileOpen && <div className="sidebar-mobile-overlay" onClick={() => setMobileOpen(false)} />}
+
+      <aside className={`sidebar ${mobileOpen ? 'mobile-open' : ''}`}>
       <div className="sidebar-logo">
         <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
           <div className="logo-icon">Q</div>
@@ -110,5 +122,6 @@ export default function Sidebar({ role = 'student', userName = 'Arjun Sharma', o
         </div>
       </div>
     </aside>
+    </>
   );
 }
