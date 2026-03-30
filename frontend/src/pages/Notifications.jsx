@@ -96,7 +96,7 @@ export default function Notifications() {
                 </div>
                 <div className="form-group">
                   <label className="form-label">Channels</label>
-                  <div style={{ display: 'flex', gap: 12 }}>
+                  <div className="notification-channels" style={{ display: 'flex', gap: 12 }}>
                     {[{ key: 'email', icon: Mail, label: 'Email' }, { key: 'sms', icon: MessageSquare, label: 'SMS' }].map(({ key, icon: Icon, label }) => (
                       <label key={key} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', padding: '10px 16px', border: `1.5px solid ${channels[key] ? 'var(--primary)' : 'var(--border)'}`, borderRadius: 'var(--radius-sm)', background: channels[key] ? 'var(--primary-light)' : '', transition: 'var(--transition)', flex: 1, justifyContent: 'center' }}>
                         <input type="checkbox" checked={channels[key]} onChange={() => setChannels(c => ({ ...c, [key]: !c[key] }))} style={{ display: 'none' }} />
@@ -124,7 +124,7 @@ export default function Notifications() {
                   {students.map((s, i) => {
                     const isSelected = selected.includes(s.id);
                     return (
-                      <div key={s.id} onClick={() => toggleStudent(s.id)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', borderBottom: i < students.length - 1 ? '1px solid var(--border)' : 'none', background: isSelected ? 'var(--primary-light)' : '', cursor: 'pointer', transition: 'var(--transition)' }}>
+                      <div key={s.id} className="notification-student-row" onClick={() => toggleStudent(s.id)} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', borderBottom: i < students.length - 1 ? '1px solid var(--border)' : 'none', background: isSelected ? 'var(--primary-light)' : '', cursor: 'pointer', transition: 'var(--transition)' }}>
                         <div style={{ width: 18, height: 18, borderRadius: 4, border: `2px solid ${isSelected ? 'var(--primary)' : 'var(--border)'}`, background: isSelected ? 'var(--primary)' : 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
                           {isSelected && <CheckCircle size={11} color="white" />}
                         </div>
@@ -146,7 +146,7 @@ export default function Notifications() {
                 <div className="card-body" style={{ padding: 0 }}>
                   {recent.length === 0 && <div style={{ padding: 16, textAlign: 'center', color: 'var(--text-muted)', fontSize: 13 }}>No notifications sent yet.</div>}
                   {recent.map((n, i) => (
-                    <div key={n.id || i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', borderBottom: i < recent.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                    <div key={n.id || i} className="notification-recent-row" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '12px 20px', borderBottom: i < recent.length - 1 ? '1px solid var(--border)' : 'none' }}>
                       <div style={{ width: 32, height: 32, borderRadius: '50%', background: n.type === 'email' ? 'var(--primary-light)' : 'var(--warning-light)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                         {n.type === 'email' ? <Mail size={14} color="var(--primary)" /> : <MessageSquare size={14} color="var(--warning)" />}
                       </div>

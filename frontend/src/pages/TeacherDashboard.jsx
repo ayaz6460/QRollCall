@@ -163,20 +163,20 @@ export default function TeacherDashboard() {
                   const isActing = actionLoading === s.token;
 
                   return (
-                    <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '16px 20px', borderBottom: i < teacherSessions.length - 1 ? '1px solid var(--border)' : 'none', background: isActive ? 'rgba(34, 197, 94, 0.06)' : isPending ? 'rgba(245, 158, 11, 0.04)' : '' }}>
+                    <div key={i} className="teacher-session-row" style={{ display: 'flex', alignItems: 'center', gap: 14, padding: '16px 20px', borderBottom: i < teacherSessions.length - 1 ? '1px solid var(--border)' : 'none', background: isActive ? 'rgba(34, 197, 94, 0.06)' : isPending ? 'rgba(245, 158, 11, 0.04)' : '' }}>
                       <div style={{ width: 44, height: 44, borderRadius: 10, background: isEnded ? 'var(--bg-secondary)' : isActive ? 'rgba(34,197,94,0.12)' : 'rgba(245,158,11,0.12)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
                         <span style={{ fontSize: 10, fontWeight: 700, color: isEnded ? 'var(--text-muted)' : isActive ? 'var(--success)' : 'var(--warning)' }}>{sessionTime}</span>
                       </div>
-                      <div style={{ flex: 1 }}>
+                      <div className="teacher-session-meta" style={{ flex: 1 }}>
                         <div style={{ fontWeight: 600, fontSize: 14 }}>{s.subject}</div>
                         <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                           {isPending ? 'Assigned — Not started' : isActive ? '🟢 In progress' : 'Completed'}
                         </div>
                       </div>
-                      <span className={`badge ${isEnded ? 'badge-gray' : isActive ? 'badge-success' : 'badge-warning'}`} style={{ marginRight: 8 }}>
+                      <span className={`badge teacher-session-status ${isEnded ? 'badge-gray' : isActive ? 'badge-success' : 'badge-warning'}`} style={{ marginRight: 8 }}>
                         {isEnded ? 'Ended' : isActive ? 'Live' : 'Pending'}
                       </span>
-                      <div style={{ display: 'flex', gap: 6 }}>
+                      <div className="teacher-session-actions" style={{ display: 'flex', gap: 6 }}>
                         {isPending && (
                           <button 
                             className="btn btn-success btn-sm" 
@@ -252,7 +252,7 @@ export default function TeacherDashboard() {
                   <div style={{ padding: '24px', textAlign: 'center', color: 'var(--text-muted)', fontSize: 13 }}>No fraud alerts today ✅</div>
                 )}
                 {fraudAlerts.map((a, i) => (
-                  <div key={a.id || i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 20px', borderBottom: i < fraudAlerts.length - 1 ? '1px solid var(--border)' : 'none' }}>
+                  <div key={a.id || i} className="teacher-fraud-row" style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 20px', borderBottom: i < fraudAlerts.length - 1 ? '1px solid var(--border)' : 'none' }}>
                     <div className="avatar" style={{ width: 36, height: 36, fontSize: 12 }}>
                       {a.studentName ? a.studentName.split(' ').map(n => n[0]).join('') : '??'}
                     </div>
@@ -260,7 +260,7 @@ export default function TeacherDashboard() {
                       <div style={{ fontWeight: 600, fontSize: 13 }}>{a.studentName || 'Unknown'}</div>
                       <div style={{ fontSize: 12, color: 'var(--danger)' }}>{a.reason}</div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
+                    <div className="teacher-fraud-meta" style={{ textAlign: 'right' }}>
                       <span className="badge badge-danger">{a.riskScore}% risk</span>
                       <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 3 }}>{a.time || 'recently'}</div>
                     </div>

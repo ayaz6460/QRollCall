@@ -82,7 +82,7 @@ export default function Students() {
         
         <div className="page-content fade-in">
           
-          <div className="card" style={{ padding: '24px 32px', marginBottom: 24, backgroundImage: 'linear-gradient(135deg, var(--primary) 0%, #4338ca 100%)', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="card students-hero" style={{ padding: '24px 32px', marginBottom: 24, backgroundImage: 'linear-gradient(135deg, var(--primary) 0%, #4338ca 100%)', color: '#fff', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 style={{ fontSize: 24, fontWeight: 700, margin: 0 }}>Student Roster</h2>
               <p style={{ margin: '8px 0 0', opacity: 0.9, fontSize: 14 }}>Manage all students registered for this class.</p>
@@ -94,10 +94,10 @@ export default function Students() {
           </div>
 
           <div className="card">
-            <div className="card-header" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 24px' }}>
+            <div className="card-header students-toolbar" style={{ display: 'flex', justifyContent: 'space-between', padding: '20px 24px' }}>
               <span className="card-title" style={{ fontSize: 16 }}><Users size={18} style={{ display: 'inline', marginRight: 8, color: 'var(--primary)' }} />All Students</span>
-              <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-                <div className="input-icon-wrap" style={{ width: 260 }}>
+              <div className="students-toolbar-actions" style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <div className="input-icon-wrap students-toolbar-search" style={{ width: 260 }}>
                   <Search size={15} className="icon" style={{ left: 14 }} />
                   <input className="form-control" style={{ height: 40, fontSize: 13, paddingLeft: 40, borderRadius: 20, background: '#f8fafc', border: '1px solid transparent' }} placeholder="Search name or roll..." value={search} onChange={e => setSearch(e.target.value)} />
                 </div>

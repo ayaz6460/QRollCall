@@ -663,6 +663,277 @@ tbody tr:hover td { background: var(--primary-light); }
 }
 .spin { animation: spin 1s linear infinite; } @keyframes spin { 100% { transform: rotate(360deg); } }
 
+/* ─── Dashboard Page Responsiveness ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .dashboard-toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch !important;
+  }
+
+  .dashboard-toolbar-left,
+  .dashboard-toolbar-right {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .dashboard-toolbar-search {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .dashboard-toolbar-search .form-control {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-toolbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .dashboard-toolbar h3 {
+    font-size: 18px;
+  }
+
+  .dashboard-toolbar-left,
+  .dashboard-toolbar-right {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .teacher-session-row {
+    flex-wrap: wrap;
+    align-items: flex-start !important;
+    padding: 14px 12px !important;
+    gap: 10px !important;
+  }
+
+  .teacher-session-meta {
+    min-width: 0;
+    flex: 1 1 calc(100% - 56px);
+  }
+
+  .teacher-session-status {
+    margin-right: 0 !important;
+  }
+
+  .teacher-session-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .teacher-session-actions .btn {
+    flex: 1 1 120px;
+  }
+
+  .teacher-fraud-row {
+    flex-wrap: wrap;
+    align-items: flex-start !important;
+  }
+
+  .teacher-fraud-meta {
+    width: 100%;
+    text-align: left !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard-toolbar-left .btn,
+  .dashboard-toolbar-right .btn {
+    flex: 1 1 100%;
+  }
+
+  .teacher-session-actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+/* ─── Teacher/Admin Route Responsiveness ────────────────────────────────── */
+@media (max-width: 1024px) {
+  .analytics-toolbar,
+  .fraud-filter-bar,
+  .students-toolbar,
+  .live-attendance-toolbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: stretch !important;
+  }
+
+  .analytics-toolbar-actions,
+  .students-toolbar-actions {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .students-toolbar-search,
+  .analytics-toolbar-actions .btn,
+  .students-toolbar-search .form-control {
+    width: 100% !important;
+  }
+
+  .analytics-pie-layout {
+    flex-wrap: wrap;
+    justify-content: center !important;
+    gap: 16px;
+  }
+
+  .student-detail-actions {
+    flex-wrap: wrap;
+  }
+
+  .student-detail-actions .btn {
+    flex: 1 1 calc(50% - 8px);
+  }
+}
+
+@media (max-width: 768px) {
+  .analytics-toolbar,
+  .fraud-filter-bar,
+  .students-toolbar,
+  .live-attendance-toolbar {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .analytics-toolbar-actions,
+  .students-toolbar-actions {
+    margin-left: 0 !important;
+  }
+
+  .notification-channels {
+    flex-wrap: wrap;
+  }
+
+  .notification-channels label {
+    flex: 1 1 100% !important;
+  }
+
+  .notification-student-row,
+  .notification-recent-row {
+    align-items: flex-start !important;
+    flex-wrap: wrap;
+  }
+
+  .notification-recent-row .badge {
+    margin-left: 44px;
+  }
+
+  .students-hero {
+    flex-direction: column;
+    align-items: flex-start !important;
+    gap: 12px;
+    padding: 18px 18px !important;
+  }
+
+  .live-session-row {
+    flex-wrap: wrap;
+    align-items: flex-start !important;
+    gap: 10px !important;
+    padding: 14px 12px !important;
+  }
+
+  .live-session-meta {
+    min-width: 0;
+    flex: 1 1 calc(100% - 56px);
+  }
+
+  .live-session-status {
+    margin-right: 0 !important;
+  }
+
+  .live-attendance-footer-actions {
+    width: 100%;
+  }
+
+  .live-attendance-footer-actions .btn {
+    width: 100%;
+  }
+
+  .fraud-card-main {
+    flex-direction: column;
+  }
+
+  .fraud-card-left {
+    width: 100%;
+  }
+
+  .fraud-card-right {
+    width: 100%;
+    align-items: flex-start !important;
+  }
+
+  .fraud-card-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .fraud-card-actions .btn {
+    flex: 1 1 120px;
+  }
+
+  .student-detail-profile {
+    flex-direction: column;
+  }
+
+  .student-detail-channel-row {
+    flex-direction: column;
+    gap: 10px !important;
+  }
+
+  .student-detail-modal-actions {
+    flex-direction: column;
+  }
+
+  .student-edit-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .qr-display-card-shell {
+    border-radius: 20px;
+    padding: 18px !important;
+  }
+
+  .qr-display-header,
+  .qr-display-stats,
+  .qr-display-actions {
+    width: 100%;
+  }
+
+  .qr-display-actions {
+    flex-wrap: wrap;
+  }
+
+  .qr-display-actions .btn {
+    flex: 1 1 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .analytics-toolbar .btn,
+  .analytics-toolbar-actions .btn,
+  .fraud-filter-bar .btn,
+  .students-toolbar-actions .btn,
+  .live-attendance-toolbar .btn,
+  .fraud-card-actions .btn,
+  .student-detail-actions .btn {
+    width: 100%;
+  }
+
+  .student-detail-actions .btn {
+    flex: 1 1 100%;
+  }
+
+  .qr-display-card-shell {
+    padding: 14px !important;
+  }
+}
+
 /* ─── Final Responsive Overrides ─────────────────────────────────────────── */
 .sidebar-mobile-toggle {
   display: none;

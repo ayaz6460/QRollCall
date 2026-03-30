@@ -94,7 +94,7 @@ export default function FraudDetection() {
           </div>
 
           {/* Filter tabs */}
-          <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
+          <div className="fraud-filter-bar" style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
             {['all', 'pending', 'approved', 'rejected'].map(f => (
               <button key={f} className={`btn btn-sm ${filter === f ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setFilter(f)}>
                 {f.charAt(0).toUpperCase() + f.slice(1)}
@@ -112,8 +112,8 @@ export default function FraudDetection() {
                   {(() => {
                     const coords = getCoords(f.location);
                     return (
-                  <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
-                    <div style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                  <div className="fraud-card-main" style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap' }}>
+                    <div className="fraud-card-left" style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
                       <div className="avatar" style={{ width: 44, height: 44, flexShrink: 0 }}>
                         {(f.studentName || 'UN').split(' ').map(n => n[0]).join('')}
                       </div>
@@ -166,14 +166,14 @@ export default function FraudDetection() {
                       </div>
                     </div>
 
-                    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12 }}>
+                    <div className="fraud-card-right" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 12 }}>
                       <div style={{ background: riskBg(f.riskScore), borderRadius: 'var(--radius-sm)', padding: '6px 14px', textAlign: 'center' }}>
                         <div style={{ fontSize: 20, fontWeight: 800, color: riskColor(f.riskScore) }}>{f.riskScore}%</div>
                         <div style={{ fontSize: 10, color: 'var(--text-muted)', fontWeight: 600 }}>RISK SCORE</div>
                       </div>
 
                       {f.status === 'pending' ? (
-                        <div style={{ display: 'flex', gap: 8 }}>
+                        <div className="fraud-card-actions" style={{ display: 'flex', gap: 8 }}>
                           <button className="btn btn-success btn-sm" onClick={() => act(f.id, 'approved')}><CheckCircle size={13} /> Approve</button>
                           <button className="btn btn-danger btn-sm" onClick={() => act(f.id, 'rejected')}><XCircle size={13} /> Reject</button>
                           <button className="btn btn-secondary btn-sm" onClick={() => act(f.id, 'locked')}><Lock size={13} /></button>

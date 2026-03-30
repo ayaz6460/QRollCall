@@ -94,7 +94,7 @@ export default function QRDisplay() {
   if (error && !qrPayload) {
     return (
       <div className="qr-display-page">
-        <div className="qr-display-card fade-in" style={{ minWidth: 360, maxWidth: 480 }}>
+        <div className="qr-display-card fade-in" style={{ width: '100%', maxWidth: 480 }}>
           <div style={{ textAlign: 'center', padding: '40px 20px' }}>
             <div style={{ fontSize: 48, marginBottom: 16 }}>⚠️</div>
             <h3 style={{ color: 'white', marginBottom: 12 }}>Cannot Generate QR Code</h3>
@@ -110,9 +110,9 @@ export default function QRDisplay() {
 
   return (
     <div className="qr-display-page" onClick={fullscreen ? () => setFullscreen(false) : undefined}>
-      <div className="qr-display-card fade-in" style={{ minWidth: 360, maxWidth: fullscreen ? 560 : 480 }}>
+      <div className="qr-display-card qr-display-card-shell fade-in" style={{ width: '100%', maxWidth: fullscreen ? 560 : 480 }}>
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
+        <div className="qr-display-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
           {!fullscreen && (
             <button className="btn btn-icon" style={{ background: 'rgba(255,255,255,.1)', color: 'white' }} onClick={() => navigate('/teacher')}>
               <ArrowLeft size={16} />
@@ -129,7 +129,7 @@ export default function QRDisplay() {
 
         {/* Live stats */}
         {!fullscreen && (
-          <div style={{ display: 'flex', gap: 12, width: '100%' }}>
+          <div className="qr-display-stats" style={{ display: 'flex', gap: 12, width: '100%' }}>
             <div style={{ flex: 1, background: 'rgba(34,197,94,.15)', border: '1px solid rgba(34,197,94,.3)', borderRadius: 12, padding: '10px 14px', textAlign: 'center' }}>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
                 <Users size={14} color="#22C55E" />
@@ -168,7 +168,7 @@ export default function QRDisplay() {
           QR refreshes in <strong style={{ color: 'white' }}>{secondsLeft}s</strong>
         </div>
 
-        <div style={{ display: 'flex', gap: 10, width: '100%' }}>
+        <div className="qr-display-actions" style={{ display: 'flex', gap: 10, width: '100%' }}>
           <button className="btn btn-secondary" style={{ flex: 1 }} onClick={() => requestQR(subject)}>
             <RefreshCw size={15} /> Refresh QR
           </button>

@@ -301,17 +301,17 @@ export default function LiveAttendance() {
                     const isEnded = s.ended;
                     const isActing = actionLoading === s.token;
                     return (
-                      <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', borderBottom: i < todaysSessions.length - 1 ? '1px solid var(--border)' : 'none', background: isActive ? 'rgba(34, 197, 94, 0.05)' : isPending ? 'rgba(245, 158, 11, 0.04)' : '' }}>
+                      <div key={i} className="live-session-row" style={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px', borderBottom: i < todaysSessions.length - 1 ? '1px solid var(--border)' : 'none', background: isActive ? 'rgba(34, 197, 94, 0.05)' : isPending ? 'rgba(245, 158, 11, 0.04)' : '' }}>
                         <div style={{ width: 44, height: 44, borderRadius: 10, background: isEnded ? 'var(--bg-secondary)' : isActive ? 'rgba(34,197,94,0.12)' : 'rgba(245,158,11,0.12)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                           <span style={{ fontSize: 11, fontWeight: 700, color: isEnded ? 'var(--text-muted)' : isActive ? 'var(--success)' : 'var(--warning)' }}>{sessionTime}</span>
                         </div>
-                        <div style={{ flex: 1 }}>
+                        <div className="live-session-meta" style={{ flex: 1 }}>
                           <div style={{ fontWeight: 600, fontSize: 14 }}>{s.subject}</div>
                           <div style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                             {isPending ? 'Assigned — Not started yet' : isActive ? '🟢 Session in progress' : 'Session completed'}
                           </div>
                         </div>
-                        <span className={`badge ${isEnded ? 'badge-secondary' : isActive ? 'badge-success' : 'badge-warning'}`} style={{ marginRight: 12 }}>
+                        <span className={`badge live-session-status ${isEnded ? 'badge-secondary' : isActive ? 'badge-success' : 'badge-warning'}`} style={{ marginRight: 12 }}>
                           {isEnded ? 'Ended' : isActive ? 'Live' : 'Pending'}
                         </span>
                         {isPending && (
@@ -384,7 +384,7 @@ export default function LiveAttendance() {
         <Topbar title="Live Attendance" subtitle={selectedSession ? `${selectedSession.subject} · ${selectedSession.ended ? 'Ended' : 'Live Session'}` : 'Live Session'} userName={userName} />
         <div className="page-content fade-in">
 
-          <div style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div className="live-attendance-toolbar" style={{ marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <button className="btn btn-icon btn-secondary btn-sm" onClick={() => { setSelectedSession(null); fetchData(); }} style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
               <ArrowLeft size={16} /> Back to Sessions
             </button>
@@ -495,7 +495,7 @@ export default function LiveAttendance() {
           </div>
 
           {!selectedSession.ended && (
-            <div style={{ marginTop: 20, display: 'flex', gap: 12 }}>
+            <div className="live-attendance-footer-actions" style={{ marginTop: 20, display: 'flex', gap: 12 }}>
               <button className="btn btn-danger btn-lg" onClick={handleEndSession} disabled={ending}>
                 {ending ? 'Ending Session…' : '⏹ End Session & Mark Absentees'}
               </button>

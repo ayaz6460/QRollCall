@@ -112,7 +112,7 @@ export function AdminTeachersPage() {
 
   return (
     <AdminLayout title="Teachers" subtitle="Manage Teaching Staff">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+      <div className="dashboard-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
         <h3>Teacher Management</h3>
         <button className="btn btn-primary" onClick={openAddModal}><Plus size={16} /> Add Teacher</button>
       </div>
@@ -220,15 +220,15 @@ export function AdminStudentsPage() {
 
   return (
     <AdminLayout title="Students" subtitle="Student Roster & Management">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="dashboard-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div className="dashboard-toolbar-left" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <h3>Student Roster</h3>
           <button className="btn btn-secondary btn-sm" onClick={openAddStudent} style={{ borderRadius: 20 }}><Plus size={14} /> Add</button>
           <button className="btn btn-primary btn-sm" disabled={!selectedIds.length} onClick={() => setShowMsgModal(true)} style={{ opacity: selectedIds.length ? 1 : .5, borderRadius: 20 }}>
             <Send size={14} /> Broadcast {selectedIds.length > 0 ? `(${selectedIds.length})` : ''}
           </button>
         </div>
-        <div className="input-icon-wrap" style={{ width: 280 }}><Search size={15} className="icon" style={{ left: 14 }} /><input className="form-control" style={{ paddingLeft: 40, borderRadius: 20 }} placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} /></div>
+        <div className="input-icon-wrap dashboard-toolbar-search" style={{ width: 280 }}><Search size={15} className="icon" style={{ left: 14 }} /><input className="form-control" style={{ paddingLeft: 40, borderRadius: 20 }} placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} /></div>
       </div>
       <div className="card"><div className="card-body" style={{ padding: 0 }}>
         <table className="data-table"><thead><tr>
@@ -343,8 +343,8 @@ export function AdminSessionsPage() {
 
   return (
     <AdminLayout title="Sessions" subtitle="Session Registry & Management">
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="dashboard-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div className="dashboard-toolbar-left" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <h3>Session Registry</h3>
           <button className="btn btn-secondary btn-sm" onClick={() => setShowAddModal(true)} style={{ borderRadius: 20 }}><Plus size={14} /> Create Session</button>
           <button className="btn btn-sm" style={{ background: 'var(--danger)', color: 'white', borderRadius: 20, opacity: selectedTokens.length ? 1 : .5 }} disabled={!selectedTokens.length || isDeleting} onClick={handleBulkDelete}>
@@ -461,8 +461,8 @@ export function AdminAttendancePage() {
         <div className="stat-card warning"><div className="stat-label">Flagged (Fraud)</div><div className="stat-value" style={{ color: 'var(--warning)' }}>{fraud}</div></div>
       </div>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="dashboard-toolbar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
+        <div className="dashboard-toolbar-left" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <h3>Attendance Logs</h3>
           {/* Filter pills */}
           {['all', 'present', 'absent', 'fraud'].map(f => (
@@ -471,14 +471,14 @@ export function AdminAttendancePage() {
             </button>
           ))}
         </div>
-        <div style={{ display: 'flex', gap: 12 }}>
+        <div className="dashboard-toolbar-right" style={{ display: 'flex', gap: 12 }}>
           <button className="btn btn-sm btn-secondary" onClick={handleExportPDF} style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
             <span style={{ color: '#dc2626' }}>PDF</span> Export
           </button>
           <button className="btn btn-sm btn-secondary" onClick={handleExportExcel} style={{ display: 'flex', alignItems: 'center', gap: 6, fontWeight: 600 }}>
             <span style={{ color: '#16a34a' }}>Excel</span> Export
           </button>
-          <div className="input-icon-wrap" style={{ width: 220 }}>
+          <div className="input-icon-wrap dashboard-toolbar-search" style={{ width: 220 }}>
             <Search size={15} className="icon" style={{ left: 14 }} />
             <input className="form-control" style={{ paddingLeft: 40, borderRadius: 20 }} placeholder="Search..." value={search} onChange={e => setSearch(e.target.value)} />
           </div>

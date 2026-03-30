@@ -102,13 +102,13 @@ export default function Analytics() {
         <div className="page-content fade-in">
 
           {/* Filter */}
-          <div style={{ display: 'flex', gap: 8, marginBottom: 24 }}>
+          <div className="analytics-toolbar" style={{ display: 'flex', gap: 8, marginBottom: 24 }}>
             {['week', 'month', 'semester'].map(p => (
               <button key={p} className={`btn btn-sm ${period === p ? 'btn-primary' : 'btn-secondary'}`} onClick={() => setPeriod(p)}>
                 {p.charAt(0).toUpperCase() + p.slice(1)}
               </button>
             ))}
-            <div style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
+            <div className="analytics-toolbar-actions" style={{ marginLeft: 'auto', display: 'flex', gap: 8 }}>
               <button className="btn btn-sm btn-secondary" onClick={handleExportPDF} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
                 <span style={{ color: '#dc2626', fontWeight: 600 }}>PDF</span>
               </button>
@@ -163,7 +163,7 @@ export default function Analytics() {
                 {/* Pie Chart */}
                 <div className="card">
                   <div className="card-header"><span className="card-title">Present vs Absent</span></div>
-                  <div className="card-body" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
+                  <div className="card-body analytics-pie-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-around' }}>
                     <div style={{ width: 200 }}><Pie data={pieData} options={{ ...chartOpts, scales: undefined, plugins: { legend: { display: false } } }} /></div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                       {[['Present', `${overallPct}%`, '#2563EB'], ['Absent', `${100 - overallPct}%`, '#E5E9F0']].map(([l, v, c]) => (

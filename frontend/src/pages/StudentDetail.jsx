@@ -210,7 +210,7 @@ export default function StudentDetail() {
           <div className="grid grid-2 gap-20 mb-24">
             {/* Profile Card */}
             <div className="card">
-              <div className="card-body" style={{ display:'flex', gap:24, alignItems:'flex-start' }}>
+              <div className="card-body student-detail-profile" style={{ display:'flex', gap:24, alignItems:'flex-start' }}>
                 <div className="avatar" style={{ width:72, height:72, fontSize:26, flexShrink:0, background: 'var(--primary-light)', color: 'var(--primary)' }}>
                   {student.name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase()}
                 </div>
@@ -233,7 +233,7 @@ export default function StudentDetail() {
                       <span className={`badge ${riskBadge}`}>{riskLevel} Risk</span>
                     </div>
                   </div>
-                  <div style={{ display:'flex', gap:10, marginTop:16 }}>
+                  <div className="student-detail-actions" style={{ display:'flex', gap:10, marginTop:16 }}>
                     <button className="btn btn-primary btn-sm" onClick={() => setShowNotifModal(true)}>Send Notification</button>
                     <button className="btn btn-secondary btn-sm" onClick={() => setShowEditModal(true)}>Edit Profile</button>
                     <button className="btn btn-ghost btn-sm" onClick={handleExportPDF} style={{ display: 'flex', alignItems: 'center', gap: 6 }}><Download size={14} /> Export PDF</button>
@@ -378,7 +378,7 @@ export default function StudentDetail() {
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', gap: 24, padding: '12px 16px', background: 'var(--bg-secondary)', borderRadius: 12 }}>
+                <div className="student-detail-channel-row" style={{ display: 'flex', gap: 24, padding: '12px 16px', background: 'var(--bg-secondary)', borderRadius: 12 }}>
                   <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: 13, fontWeight: 600 }}>
                     <input type="checkbox" checked={sendEmail} onChange={(e) => setSendEmail(e.target.checked)} style={{ width: 16, height: 16, accentColor: 'var(--primary)' }} />
                     Send via Email
@@ -389,7 +389,7 @@ export default function StudentDetail() {
                   </label>
                 </div>
 
-                <div style={{ display: 'flex', gap: 12, marginTop: 8 }}>
+                <div className="student-detail-modal-actions" style={{ display: 'flex', gap: 12, marginTop: 8 }}>
                   <button type="button" style={{ flex: 1, height: 48, borderRadius: 12, background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontWeight: 600, cursor: 'pointer' }} onClick={() => setShowNotifModal(false)}>
                     Cancel
                   </button>
@@ -423,7 +423,7 @@ export default function StudentDetail() {
                 <label className="form-label">Full Name</label>
                 <input type="text" className="form-control" value={editForm.name} onChange={e => setEditForm({ ...editForm, name: e.target.value })} required />
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+              <div className="student-edit-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                 <div className="form-group">
                   <label className="form-label">Roll Number</label>
                   <input type="text" className="form-control" value={editForm.roll} onChange={e => setEditForm({ ...editForm, roll: e.target.value })} required />
@@ -438,7 +438,7 @@ export default function StudentDetail() {
                 <input type="email" className="form-control" value={editForm.email} onChange={e => setEditForm({ ...editForm, email: e.target.value })} required />
               </div>
 
-              <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
+              <div className="student-detail-modal-actions" style={{ display: 'flex', gap: 12, marginTop: 16 }}>
                 <button type="button" style={{ flex: 1, height: 48, borderRadius: 12, background: 'transparent', border: '1px solid var(--border)', color: 'var(--text-secondary)', fontWeight: 600, cursor: 'pointer' }} onClick={() => setShowEditModal(false)}>
                   Cancel
                 </button>
