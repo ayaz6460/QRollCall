@@ -1,4 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, QrCode, Users, AlertTriangle, Bell,
   BarChart2, UserCircle, LogOut, ScanLine, CheckSquare, Shield
@@ -32,11 +33,18 @@ const teacherNav = [
   { icon: Bell,            label: 'Notifications', path: '/notifications' },
 ];
 
-export default function Sidebar({ role = 'student', userName = 'Arjun Sharma' }) {
+export default function Sidebar({ role = 'student', userName = 'Arjun Sharma', onLogout }) {
   const navigate = useNavigate();
   const location = useLocation();
+  const { logout } = useAuth();
   const navItems = role === 'admin' ? adminNav : role === 'teacher' ? teacherNav : studentNav;
   const initials = userName.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+  const handleSignOut = () => {
+    if (typeof onLogout === 'function') onLogout();
+    else logout();
+    navigate('/login', { replace: true });
+  };
 
   return (
     <aside className="sidebar">
@@ -75,7 +83,7 @@ export default function Sidebar({ role = 'student', userName = 'Arjun Sharma' })
         <div
           className="nav-item mt-8"
           style={{ color: 'var(--danger)' }}
-          onClick={() => navigate('/login')}
+          onClick={handleSignOut}
         >
           <LogOut size={17} />
           Sign Out
