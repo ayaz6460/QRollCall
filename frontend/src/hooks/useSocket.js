@@ -4,9 +4,19 @@ import { io } from 'socket.io-client';
 
 let socketInstance = null;
 
+const configuredSocketUrl = (import.meta.env.VITE_SOCKET_URL || '').trim();
+
+function getSocketServerUrl() {
+  if (!configuredSocketUrl) return '/';
+  return configuredSocketUrl.replace(/\/$/, '');
+}
+
 export const getSocket = () => {
   if (!socketInstance) {
-    socketInstance = io('/', { transports: ['websocket', 'polling'] });
+    socketInstance = io(getSocketServerUrl(), {
+      transports: ['websocket', 'polling'],
+      path: '/socket.io'
+    });
   }
   return socketInstance;
 };
